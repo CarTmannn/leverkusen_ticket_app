@@ -1,0 +1,32 @@
+name: ticket_app
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment:
+  sdk: '>=3.2.6 <4.0.0'
+
+dependencies:
+  carousel_slider: ^4.2.1
+  convert: ^3.1.1
+  cupertino_icons: ^1.0.2
+  flutter:
+    sdk: flutter
+  get: 4.6.6
+  http: ^1.2.1
+  intl: ^0.19.0
+  lottie: ^3.1.0
+  shared_preferences: ^2.2.3
+  shimmer: ^3.0.0
+  web_socket: ^0.1.4
+  web_socket_channel: ^3.0.0
+
+dev_dependencies:
+  flutter_lints: 3.0.2
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - assets/image/
+    - assets/lottie/
+  uses-material-design: true
