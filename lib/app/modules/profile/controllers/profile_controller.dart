@@ -2,14 +2,39 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_app/app/modules/home/controllers/home_controller.dart';
+import 'package:ticket_app/app/routes/app_pages.dart';
 
 class ProfileController extends GetxController {
   double positionY = 0;
+  HomeController ip = HomeController();
   var isLoading = true.obs;
   var saldo = 0.obs;
   var tickets = [].obs;
-  HomeController ip = HomeController();
+  var name = ''.obs;
+  var gender = ''.obs;
+  var birthDate = ''.obs;
+  var customerId = 0.obs;
+  var photo = ''.obs;
+  var email = ''.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    loadUserProfile();
+  }
+
+  Future<void> loadUserProfile() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    name.value = prefs.getString('name') ?? '';
+    saldo.value = int.parse(prefs.getString('balance') ?? '0');
+    gender.value = prefs.getString('gender') ?? '';
+    birthDate.value = prefs.getString('birthdate') ?? '';
+    customerId.value = prefs.getInt('customer_id') ?? 0;
+    photo.value = prefs.getString('photo') ?? '';
+    email.value = prefs.getString('emailView') ?? '';
+  }
 
   void updatePosition(double newPositionY) {
     positionY = newPositionY;
@@ -58,5 +83,11 @@ class ProfileController extends GetxController {
       print('Failed to fetch tickets: ${response.statusCode}');
     }
     isLoading.value = false;
+  }
+
+  Future<void> logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    Get.offAllNamed(Routes.LOGIN);
   }
 }

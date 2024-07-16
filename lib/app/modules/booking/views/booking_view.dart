@@ -169,9 +169,9 @@ class BookingView extends GetView<BookingController> {
                       GestureDetector(
                         onTap: () async {
                           await scheduleController3
-                              .getTicket(scheduleController2.customerId.value);
+                              .getTicket(scheduleController.customerId.value);
                           await scheduleController
-                              .getSaldo(scheduleController2.customerId.value);
+                              .getSaldo(scheduleController.customerId.value);
                           await Get.toNamed(Routes.PROFILE);
                         },
                         child: NavBar(

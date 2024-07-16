@@ -207,9 +207,9 @@ class HomeView extends GetView<HomeController> {
                     GestureDetector(
                         onTap: () async {
                           await homeController2
-                              .getTicket(homeController3.customerId.value);
+                              .getTicket(homeController2.customerId.value);
                           await homeController2
-                              .getSaldo(homeController3.customerId.value);
+                              .getSaldo(homeController2.customerId.value);
                           Get.toNamed(Routes.PROFILE);
                         },
                         child: NavBar(

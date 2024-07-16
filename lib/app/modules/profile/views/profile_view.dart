@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_app/app/modules/dump/views/dump_view.dart';
 import 'package:ticket_app/app/modules/home/controllers/home_controller.dart';
 import 'package:ticket_app/app/modules/home/views/home_view.dart';
@@ -35,7 +36,7 @@ class ProfileView extends GetView<ProfileController> {
         actions: [
           IconButton(
               onPressed: () {
-                Get.offAllNamed(Routes.LOGIN);
+                controller.logout();
               },
               icon: Icon(
                 Icons.logout,
@@ -100,8 +101,8 @@ class ProfileView extends GetView<ProfileController> {
                                   width: 22,
                                 ),
                                 TicketSheet(
-                                  customer: profileController.customerId.value
-                                      .toString(),
+                                  customer:
+                                      controller.customerId.value.toString(),
                                   date: controller.tickets[index]
                                       ["booking_date"],
                                   ticketId: controller.tickets[index]
@@ -182,13 +183,13 @@ class ProfileView extends GetView<ProfileController> {
                                               borderRadius:
                                                   BorderRadius.circular(100),
                                               color: Colors.amber),
-                                          child: profileController.photo == ""
+                                          child: controller.photo == ""
                                               ? Image.network(
                                                   "https://cdn.idntimes.com/content-images/community/2023/05/5f6fa1a35b9240668d0824540ede58bb-241112060-223804176378243-6627428181004591071-n-b9c7fac7543a061202919ad3b742ab1f-993bfed02ebac1febcd7afa806ae76bb.jpg",
                                                   fit: BoxFit.cover,
                                                 )
                                               : Image.network(
-                                                  profileController.photo
+                                                  controller.photo.value
                                                       .toString(),
                                                   fit: BoxFit.cover,
                                                 ),
@@ -205,7 +206,7 @@ class ProfileView extends GetView<ProfileController> {
                                     color: Colors.white, fontSize: 15)),
                             SizedBox(height: 10),
                             Text(
-                              profileController.name.value,
+                              controller.name.value,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
@@ -223,7 +224,7 @@ class ProfileView extends GetView<ProfileController> {
                                     color: Colors.white, fontSize: 15)),
                             SizedBox(height: 10),
                             Text(
-                              profileController.email.value,
+                              controller.email.value,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
@@ -241,7 +242,7 @@ class ProfileView extends GetView<ProfileController> {
                                     color: Colors.white, fontSize: 15)),
                             SizedBox(height: 10),
                             Text(
-                              profileController.gender.value,
+                              controller.gender.value,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
@@ -261,7 +262,7 @@ class ProfileView extends GetView<ProfileController> {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              profileController.birthDate.value,
+                              controller.birthDate.value,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,

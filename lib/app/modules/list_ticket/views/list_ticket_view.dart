@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:ticket_app/app/modules/home/controllers/home_controller.dart';
 import 'package:ticket_app/app/modules/home/views/home_view.dart';
 import 'package:ticket_app/app/modules/login/controllers/login_controller.dart';
+import 'package:ticket_app/app/modules/profile/controllers/profile_controller.dart';
 import 'package:ticket_app/app/routes/app_pages.dart';
 
 import '../controllers/list_ticket_controller.dart';
@@ -14,6 +15,7 @@ class ListTicketView extends GetView<ListTicketController> {
   ListTicketView({Key? key}) : super(key: key);
   final listTicketController = Get.put(HomeController());
   final listTicketController2 = Get.put(LoginController());
+  final listTicketController3 = Get.put(ProfileController());
   DateTime dateTime = DateTime.now();
 
   @override
@@ -207,7 +209,7 @@ class ListTicketView extends GetView<ListTicketController> {
                                                                     .bold),
                                                       ),
                                                       Text(
-                                                        listTicketController2
+                                                        listTicketController3
                                                             .name.value,
                                                         style: TextStyle(
                                                             color: Colors.black,
@@ -229,7 +231,7 @@ class ListTicketView extends GetView<ListTicketController> {
                                                                     .bold),
                                                       ),
                                                       Text(
-                                                        listTicketController2
+                                                        listTicketController3
                                                             .email.value,
                                                         style: TextStyle(
                                                             color: Colors.black,
@@ -277,7 +279,7 @@ class ListTicketView extends GetView<ListTicketController> {
                                                           GestureDetector(
                                                             onTap: () {
                                                               controller.paymentGateway(
-                                                                  listTicketController2
+                                                                  listTicketController3
                                                                       .customerId
                                                                       .value,
                                                                   controller

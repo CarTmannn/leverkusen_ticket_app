@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ticket_app/app/modules/home/controllers/home_controller.dart';
 import 'package:ticket_app/app/modules/list_ticket/controllers/list_ticket_controller.dart';
 import 'package:ticket_app/app/modules/login/controllers/login_controller.dart';
@@ -20,10 +21,14 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  int? customerId = prefs.getInt("customer_id");
+
   runApp(
     GetMaterialApp(
       title: "Application",
-      initialRoute: Routes.INTRO,
+      initialRoute: customerId == null ? Routes.LOGIN : Routes.HOME,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
     ),

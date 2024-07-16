@@ -117,9 +117,9 @@ class ScheduleView extends GetView<ScheduleController> {
                                 GestureDetector(
                                   onTap: () async {
                                     await scheduleController2.getTicket(
-                                        scheduleController3.customerId.value);
+                                        scheduleController2.customerId.value);
                                     await scheduleController2.getSaldo(
-                                        scheduleController3.customerId.value);
+                                        scheduleController2.customerId.value);
                                     await Get.toNamed(Routes.PROFILE);
                                   },
                                   child: NavBar(

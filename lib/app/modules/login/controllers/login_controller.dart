@@ -16,6 +16,7 @@ class LoginController extends GetxController {
   final birthDate = "".obs;
   final gender = "".obs;
   final email = "".obs;
+  final emailView = "".obs;
   final password = "".obs;
   final saldo = 0.obs;
   final photo = "".obs;
@@ -44,6 +45,16 @@ class LoginController extends GetxController {
           birthDate.value = data['birthdate'];
           customerId.value = data["customer_id"];
           photo.value = data["photo"];
+          emailView.value = data["email"];
+
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setInt('customer_id', data['customer_id']);
+          await prefs.setString('name', data['name']);
+          await prefs.setString('balance', data['balance'].toString());
+          await prefs.setString('gender', data['gender']);
+          await prefs.setString('birthdate', data['birthdate']);
+          await prefs.setString('photo', data['photo']);
+          await prefs.setString('emailView', data['email']);
           Get.offAllNamed(Routes.HOME);
         } else {
           errorMessage.value = 'Invalid email or password';
